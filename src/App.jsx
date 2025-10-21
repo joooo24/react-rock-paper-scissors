@@ -24,12 +24,14 @@ function App() {
     const [computerSelect, setComputerSelect] = useState(choice.rock); // 컴퓨터 선택
     const [userResult, setUserResult] = useState("유저결과"); // 유저 결과
     const [computerResult, setComputerResult] = useState("컴퓨터결과"); // 컴퓨터 결과
+    const [userScore, setUserScore] = useState(0); // 유저 승리 횟수
+    const [computerScore, setComputerScore] = useState(0); // 컴퓨터 승리 횟수
 
     // 랜덤 선택 함수
     const randomChoice = () => {
         let itemArray = Object.keys(choice); // ["rock", "scissors", "paper"]
         let randomItem = Math.floor(Math.random() * itemArray.length); // 0~2 중 랜덤
-        return itemArray[randomItem]; // 랜덤한 선택지 반환
+        return itemArray[randomItem]; // 랜덤 선택지 반환
     };
 
     // 승부 판정 함수
@@ -44,9 +46,11 @@ function App() {
         ) {
             setUserResult("win");
             setComputerResult("lose");
+            setUserScore((prev) => prev + 1); // 유저 승리 횟수 증가
         } else {
             setUserResult("lose");
             setComputerResult("win");
+            setComputerScore((prev) => prev + 1); // 컴퓨터 승리 횟수 증가
         }
     };
 
@@ -62,11 +66,17 @@ function App() {
 
     return (
         <div className="container">
-            <div className="wrap">
-                <Box title="You" item={userSelect} result={userResult} />
+            <div className="wrap score-wrap">
+                <div className="score">Player: {userScore}</div>
+                <div className="score">Computer: {computerScore}</div>
+            </div>
+
+            <div className="wrap result-wrap">
+                <Box title="Player" item={userSelect} result={userResult} />
                 <Box title="Computer" item={computerSelect} result={computerResult} />
             </div>
-            <div className="wrap">
+
+            <div className="wrap button-wrap">
                 <button onClick={() => play("scissors")}>가위</button>
                 <button onClick={() => play("rock")}>바위</button>
                 <button onClick={() => play("paper")}>보</button>
