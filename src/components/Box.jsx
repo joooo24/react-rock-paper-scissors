@@ -1,13 +1,12 @@
 import React from "react";
 
-const Box = (props) => {
+const Box = ({ title, item, result }) => {
     return (
-        <div>
-            <h1>{props.title}</h1>
-            {props?.item?.img && (
-                <img className="item-img" src={props?.item?.img} alt={props.title} />
-            )}
-            <h2>{props.result}</h2>
+        <div className={`box ${result}`}>
+            <h1>{title}</h1>
+            <h2>{item?.name}</h2>
+            <img className="item-img" src={item?.img} alt="img"></img>
+            <h2>{result}</h2>
         </div>
     );
 };
