@@ -5,8 +5,8 @@ const Box = ({ title, item, result }) => {
         <div className={`box ${result}`}>
             <h1>{title}</h1>
             <h2>{item?.name}</h2>
-            <img className="item-img" src={item?.img} alt="img"></img>
-            <h2>{result}</h2>
+            {item?.img && <img className="item-img" src={item.img} alt={item.name} />}
+            <h2>{result || "결과"}</h2>
         </div>
     );
 };
